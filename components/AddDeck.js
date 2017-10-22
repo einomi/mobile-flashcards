@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, KeyboardAvoidingView, TextInput } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, KeyboardAvoidingView, TextInput } from 'react-native'
 import stylesCommon from '../utils/stylesCommon'
 
 class AddDeck extends React.Component {

@@ -1,30 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { connect } from 'react-redux'
 
 import * as colors from '../utils/colors'
-
-const items = [
-    {
-        id: 0,
-        title: 'React',
-        cards: [1, 2, 3, 4]
-    },
-    {
-        id: 1,
-        title: 'Udacity',
-        cards: [1, 2, 3, 4, 5]
-    },
-    {
-        id: 2,
-        title: 'МГИМО',
-        cards: [1, 2, 4]
-    },
-];
+import { getDecks } from '../reducers'
 
 class DeckList extends React.Component {
-    renderItem = ({item}) => {
+    renderItem = ({item, index}) => {
         return (
-            <View style={styles.item}>
+            <View style={[styles.item, index === 0 && {borderTopWidth: 0.5}]}>
                 <Text style={styles.itemTitle}>{item.title}</Text>
                 <Text style={styles.itemCaption}>{item.cards.length} cards</Text>
             </View>
@@ -33,7 +17,7 @@ class DeckList extends React.Component {
 
     render() {
         return (
-            <FlatList data={items} renderItem={this.renderItem} keyExtractor={item => item.id} contentContainerStyle={styles.container} />
+            <FlatList data={this.props.items} renderItem={this.renderItem} keyExtractor={item => item.id} contentContainerStyle={styles.container} />
         );
     }
 }
@@ -60,4 +44,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DeckList
+export default connect(
+    state => ({
+        items: getDecks(state)
+    })
+)(DeckList)
