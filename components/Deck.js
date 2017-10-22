@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import Button from './Button'
+import TextButton from './TextButton'
 import * as colors from '../utils/colors'
 
 class Deck extends React.Component {
@@ -13,8 +13,8 @@ class Deck extends React.Component {
                     <Text style={styles.caption}>3 cards</Text>
                 </View>
                 <View>
-                    <Button style={{marginBottom: 10}}>Add Card</Button>
-                    <Button dark={true}>Start Quiz</Button>
+                    <TextButton style={{marginBottom: 10}}>Add Card</TextButton>
+                    <TextButton dark={true}>Start Quiz</TextButton>
                 </View>
             </View>
         );
@@ -38,6 +38,5 @@ const styles = StyleSheet.create({
         color: colors.grey
     },
 });
-
 
 export default Deck

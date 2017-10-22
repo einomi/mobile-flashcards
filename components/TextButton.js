@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import * as colors from '../utils/colors'
 
-const Button = ({children, dark, style}) => (
+const TextButton = ({children, dark, style}) => (
     <TouchableOpacity style={[styles.container, dark && styles.containerDark, style]}>
         <Text style={[styles.text, dark && styles.textDark]}>{children}</Text>
     </TouchableOpacity>
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Button
+export default TextButton
