@@ -1,4 +1,7 @@
+import { NavigationActions } from 'react-navigation'
 import uuidv4 from 'uuid/v4'
+
+import { DECKS_TAB } from '../components/Tabs'
 
 export const ADD_DECK = 'ADD_DECK';
 

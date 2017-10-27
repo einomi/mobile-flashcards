@@ -1,29 +1,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { StyleSheet, Text, View, StatusBar, AppState, AsyncStorage } from 'react-native'
-import { TabNavigator } from 'react-navigation'
 import { Constants } from 'expo'
-import { Foundation } from '@expo/vector-icons'
 
 import store from './store'
-import DeckList from './components/DeckList'
-import AddDeck from './components/AddDeck'
-import * as colors from './utils/colors'
-
-const Tabs = TabNavigator({
-    Decks: {
-        screen: DeckList,
-        navigationOptions: {
-            tabBarIcon: <Foundation name="list" size={24} color={colors.dark} />
-        }
-    },
-    NewDeck: {
-        screen: AddDeck,
-        navigationOptions: {
-            tabBarIcon: <Foundation name="plus" size={24} color={colors.dark} />
-        }
-    }
-});
+import Tabs from './components/Tabs'
 
 export default class App extends React.Component {
     state = {
