@@ -6,6 +6,8 @@ import * as colors from '../utils/colors'
 import { getDecks } from '../reducers'
 
 class DeckList extends React.Component {
+
+
     renderItem = ({item, index}) => {
         return (
             <View style={[styles.item, index === 0 && {borderTopWidth: 0.5}]}>
