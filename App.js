@@ -2,9 +2,10 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { StyleSheet, Text, View, StatusBar, AppState, AsyncStorage } from 'react-native'
 import { Constants } from 'expo'
+import { updateFocus } from 'react-navigation-is-focused-hoc'
 
 import store from './store'
-import Tabs from './components/Tabs'
+import HomeNavigator from './components/HomeNavigator'
 
 export default class App extends React.Component {
     state = {
@@ -54,7 +55,11 @@ export default class App extends React.Component {
                     <View style={{height: Constants.statusBarHeight}}>
                         <StatusBar/>
                     </View>
-                    <Tabs />
+                    <HomeNavigator
+                        onNavigationStateChange={(prevState, currentState) => {
+                            updateFocus(currentState);
+                        }}
+                    />
                 </View>
             </Provider>
         );

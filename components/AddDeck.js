@@ -2,17 +2,24 @@ import React from 'react'
 import { StyleSheet, Text, KeyboardAvoidingView, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 import TextButton from './TextButton'
 import * as actions from '../actions'
 import TextInputMod from './TextInputMod'
 import { required } from '../utils/validators'
 import Success from './Success'
-import { DECKS_TAB } from './Tabs'
+import { DECKS_TAB } from './HomeNavigator'
 
 const FORM_ID = 'addDeck';
 
 class AddDeck extends React.Component {
+    componentWillReceiveProps(nextProps) {
+        if (!this.props.isFocused && nextProps.isFocused) {
+            this.props.resetForm(FORM_ID);
+        }
+    }
+
     handleSubmit = values => {
         this.props.addDeck(values);
     };
@@ -21,6 +28,7 @@ class AddDeck extends React.Component {
         if (this.props.submitSucceeded) {
             return (
                 <Success
+                    formId={FORM_ID}
                     text="New deck was successfully added!"
                     onPress={() => this.props.navigation.navigate(DECKS_TAB)}/>
             );
@@ -63,6 +71,6 @@ AddDeck = connect(
     actions
 )(AddDeck);
 
-export default reduxForm({
+export default withNavigationFocus(reduxForm({
     form: FORM_ID,
-})(AddDeck)
+})(AddDeck))

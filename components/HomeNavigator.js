@@ -2,28 +2,31 @@ import React from 'react'
 import { TabNavigator } from 'react-navigation'
 import { Foundation } from '@expo/vector-icons'
 
-import DeckList from './DeckList'
+import DeckNavigator from './DeckNavigator'
 import AddDeck from './AddDeck'
 import * as colors from '../utils/colors'
 
 export const DECKS_TAB = 'Decks';
 export const NEW_DECK_TAB = 'NewDeck';
+const ICON_SIZE = 24;
 
-const Tabs = TabNavigator(
+const HomeNavigator = TabNavigator(
     {
         [DECKS_TAB]: {
-            screen: DeckList,
+            screen: DeckNavigator,
             navigationOptions: {
-                tabBarIcon: <Foundation name="list" size={24} color={colors.dark}/>
+                tabBarLabel: 'Decks',
+                tabBarIcon: <Foundation name="list" size={ICON_SIZE} color={colors.dark}/>
             }
         },
         [NEW_DECK_TAB]: {
             screen: AddDeck,
             navigationOptions: {
-                tabBarIcon: <Foundation name="plus" size={24} color={colors.dark}/>
+                tabBarLabel: 'New Deck',
+                tabBarIcon: <Foundation name="plus" size={ICON_SIZE} color={colors.dark}/>
             }
         }
     }
 );
 
-export default Tabs
+export default HomeNavigator

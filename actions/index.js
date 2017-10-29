@@ -1,7 +1,5 @@
-import { NavigationActions } from 'react-navigation'
 import uuidv4 from 'uuid/v4'
-
-import { DECKS_TAB } from '../components/Tabs'
+import { reset } from 'redux-form'
 
 export const ADD_DECK = 'ADD_DECK';
 
@@ -18,4 +16,8 @@ export const addDeck = values => {
         type: ADD_DECK,
         deck
     };
+};
+
+export const resetForm = formId => (dispatch, getState) => {
+    dispatch(reset(formId));
 };

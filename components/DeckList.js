@@ -1,19 +1,22 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 import * as colors from '../utils/colors'
 import { getDecks } from '../reducers'
+import { SCREEN_DECK } from './DeckNavigator'
 
 class DeckList extends React.Component {
-
+    handlePress(deckId) {
+        this.props.navigation.navigate(SCREEN_DECK, { deckId });
+    }
 
     renderItem = ({item, index}) => {
         return (
-            <View style={[styles.item, index === 0 && {borderTopWidth: 0.5}]}>
+            <TouchableOpacity style={[styles.item, index === 0 && {borderTopWidth: 0.5}]} onPress={() => this.handlePress(item.id)}>
                 <Text style={styles.itemTitle}>{item.title}</Text>
                 <Text style={styles.itemCaption}>{item.cards.length} cards</Text>
-            </View>
+            </TouchableOpacity>
         );
     };
 
