@@ -5,10 +5,15 @@ import { connect } from 'react-redux'
 import TextButton from './TextButton'
 import * as colors from '../utils/colors'
 import { getDeck } from '../reducers'
+import { SCREEN_ADD_CARD } from './DeckNavigator'
 
 class DeckDetail extends React.Component {
+    componentDidUpdate() {
+        console.log('DID UPDATE');
+    }
+
     render() {
-        const { title, cards } = this.props;
+        const { title, cards, deckId } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.top}>
@@ -16,8 +21,13 @@ class DeckDetail extends React.Component {
                     <Text style={styles.caption}>{cards.length} cards</Text>
                 </View>
                 <View>
-                    <TextButton style={{marginBottom: 10}}>Add Card</TextButton>
-                    <TextButton dark={true}>Start Quiz</TextButton>
+                    <TextButton
+                        bright={true}
+                        style={{marginBottom: 10}}
+                        onPress={() => this.props.navigation.navigate(SCREEN_ADD_CARD, { deckId })}>
+                        Add Card
+                    </TextButton>
+                    <TextButton>Start Quiz</TextButton>
                 </View>
             </View>
         );
@@ -47,7 +57,10 @@ const styles = StyleSheet.create({
 export default connect(
     (state, navigationData) => {
         const deckId = navigationData.navigation.state.params.deckId;
+        console.log('DECK ID', deckId);
+        console.log('DECK', getDeck(state, deckId));
         return {
+            deckId,
             ...getDeck(state, deckId)
         };
     }

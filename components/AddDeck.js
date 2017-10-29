@@ -6,12 +6,14 @@ import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 
 import TextButton from './TextButton'
 import * as actions from '../actions'
-import TextInputMod from './TextInputMod'
+import Input from './Input'
 import { required } from '../utils/validators'
 import Success from './Success'
 import { DECKS_TAB } from './HomeNavigator'
+import Title from './Title'
 
 const FORM_ID = 'addDeck';
+const SUCCESS_TEXT = 'New deck was successfully added!';
 
 class AddDeck extends React.Component {
     componentWillReceiveProps(nextProps) {
@@ -29,16 +31,16 @@ class AddDeck extends React.Component {
             return (
                 <Success
                     formId={FORM_ID}
-                    text="New deck was successfully added!"
+                    text={SUCCESS_TEXT}
                     onPress={() => this.props.navigation.navigate(DECKS_TAB)}/>
             );
         }
 
         return (
             <KeyboardAvoidingView style={styles.container}>
-                <Text style={styles.title}>What is the title of your new deck?</Text>
-                <Field name="title" component={TextInputMod} placeholder="Deck Title" validate={[required]} style={styles.input}/>
-                <TextButton dark={true} onPress={this.props.handleSubmit(this.handleSubmit)}>Submit</TextButton>
+                <Title>What is the title of your new deck?</Title>
+                <Field name="title" component={Input} placeholder="Deck Title" validate={[required]} style={styles.input}/>
+                <TextButton onPress={this.props.handleSubmit(this.handleSubmit)}>Submit</TextButton>
             </KeyboardAvoidingView>
         );
     }
@@ -49,13 +51,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    title: {
-        fontSize: 28,
-        fontWeight: '500',
-        textAlign: 'center',
-        marginBottom: 20,
-        width: 300
     },
     input: {
         marginBottom: 22,

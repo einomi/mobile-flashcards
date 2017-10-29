@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import * as colors from '../utils/colors'
 
-const TextInputMod = ({ input, style, meta: {visited, error}, ...restProps }) => {
+const Input = ({ input, style, meta: {visited, error}, ...restProps }) => {
     return (
         <View>
             {visited && error && <Text style={[styles.error]}>{error}</Text>}
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TextInputMod
+export default Input

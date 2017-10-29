@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 import * as colors from '../utils/colors'
 
-const TextButton = ({children, dark, style, onPress}) => (
-    <TouchableOpacity style={[styles.container, dark && styles.containerDark, style]} onPress={onPress}>
-        <Text style={[styles.text, dark && styles.textDark]}>{children}</Text>
+const TextButton = ({children, bright, style, onPress}) => (
+    <TouchableOpacity style={[styles.container, bright && styles.containerBright, style]} onPress={onPress}>
+        <Text style={[styles.text, bright && styles.textBright]}>{children}</Text>
     </TouchableOpacity>
 );
 
@@ -15,16 +15,18 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         borderRadius: 3,
         borderWidth: 1,
-        borderColor: colors.dark
-    },
-    containerDark: {
+        borderColor: colors.dark,
         backgroundColor: colors.dark,
     },
-    text: {
-        textAlign: 'center'
+    containerBright: {
+        backgroundColor: colors.white
     },
-    textDark: {
+    text: {
+        textAlign: 'center',
         color: colors.white
+    },
+    textBright: {
+        color: colors.dark
     }
 });
 

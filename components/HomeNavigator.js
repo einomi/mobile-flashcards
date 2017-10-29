@@ -1,6 +1,7 @@
 import React from 'react'
 import { TabNavigator } from 'react-navigation'
 import { Foundation } from '@expo/vector-icons'
+import { updateFocus } from 'react-navigation-is-focused-hoc'
 
 import DeckNavigator from './DeckNavigator'
 import AddDeck from './AddDeck'
@@ -13,7 +14,7 @@ const ICON_SIZE = 24;
 const HomeNavigator = TabNavigator(
     {
         [DECKS_TAB]: {
-            screen: DeckNavigator,
+            screen: () => <DeckNavigator onNavigationStateChange={(prevState, currentState) => updateFocus(currentState)}/>,
             navigationOptions: {
                 tabBarLabel: 'Decks',
                 tabBarIcon: <Foundation name="list" size={ICON_SIZE} color={colors.dark}/>

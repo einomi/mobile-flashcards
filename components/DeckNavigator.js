@@ -1,11 +1,14 @@
+import React from 'react'
 import { StackNavigator } from 'react-navigation'
 
 import DeckList from './DeckList'
 import DeckDetail from './DeckDetail'
 import * as colors from '../utils/colors'
+import AddCard from './AddCard'
 
-export const SCREEN_DECKS = 'DeckList';
-export const SCREEN_DECK = 'DeckDetail';
+export const SCREEN_DECKS = 'DeckListScreen';
+export const SCREEN_DECK = 'DeckDetailScreen';
+export const SCREEN_ADD_CARD = 'AddCardScreen';
 
 const DeckNavigator = StackNavigator(
     {
@@ -17,6 +20,9 @@ const DeckNavigator = StackNavigator(
         },
         [SCREEN_DECK]: {
             screen: DeckDetail,
+        },
+        [SCREEN_ADD_CARD]: {
+            screen: AddCard
         }
     },
     {
