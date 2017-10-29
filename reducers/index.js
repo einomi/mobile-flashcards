@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
-import decks from './decks'
-import * as fromDecks from './decks'
+import decks, * as fromDecks from './decks'
 import cards from './cards'
 
 const rootReducer = combineReducers({
@@ -12,5 +11,6 @@ const rootReducer = combineReducers({
 });
 
 export const getDecks = state => fromDecks.getDecks(state.decks);
+export const getDeck = (state, id) => fromDecks.getDeck(state.decks, id);
 
 export default rootReducer

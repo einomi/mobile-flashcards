@@ -14,6 +14,7 @@ const entities = (state = [], action) => {
 };
 
 export const getDecks = state => state.entities;
+export const getDeck = (state, id) => state.entities.find(i => i.id === id);
 
 export default combineReducers({
     entities,
