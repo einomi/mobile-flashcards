@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, KeyboardAvoidingView, TextInput } from 'react-native'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
+import { NavigationActions } from 'react-navigation'
 
 import TextButton from './TextButton'
 import Title from './Title'
@@ -11,23 +11,30 @@ import { required } from '../utils/validators'
 import * as actions from '../actions'
 import Success from './Success'
 import { SCREEN_DECK } from './DeckNavigator'
+import { DECKS_TAB } from './HomeNavigator'
 
-const FORM_ID = 'addCard';
+export const FORM_ID = 'addCard';
 const SUCCESS_TEXT = 'New card was successfully added!';
 
 class AddCard extends React.Component {
     componentWillReceiveProps(nextProps) {
-        // console.log('NEXT PROPS', nextProps);
-        if (!this.props.isFocused && nextProps.isFocused) {
-            console.log('ENTER!');
-            // this.props.resetForm(FORM_ID);
+        if (nextProps.resetFormKey !== this.props.resetFormKey) {
+            this.props.resetForm(FORM_ID);
         }
     }
-    
+
     handleSubmit = values => {
         const deckId = this.props.navigation.state.params.deckId;
-        console.log(deckId);
         this.props.addCard(values, deckId);
+    };
+
+    onSuccessPress = deckId => {
+        const navigateAction = NavigationActions.navigate({
+            routeName: SCREEN_DECK,
+            params: { deckId }
+        });
+
+        this.props.navigation.dispatch(navigateAction);
     };
 
     render() {
@@ -37,7 +44,7 @@ class AddCard extends React.Component {
                 <Success
                     formId={FORM_ID}
                     text={SUCCESS_TEXT}
-                    onPress={() => this.props.navigation.goBack()}/>
+                    onPress={() => this.onSuccessPress(deckId)}/>
             );
         }
 
@@ -65,14 +72,16 @@ const styles = StyleSheet.create({
 });
 
 AddCard = connect(
-    state => {
+    (state, navigationData) => {
+        const resetFormKey = navigationData.navigation.state.params.resetFormKey;
         return {
-            submitSucceeded: state.form[FORM_ID] && state.form[FORM_ID].submitSucceeded
+            submitSucceeded: state.form[FORM_ID] && state.form[FORM_ID].submitSucceeded,
+            resetFormKey
         };
     },
     actions
 )(AddCard);
 
-export default withNavigationFocus(reduxForm({
+export default reduxForm({
     form: FORM_ID
-})(AddCard))
+})(AddCard)

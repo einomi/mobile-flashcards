@@ -18,7 +18,6 @@ export const addDeck = values => {
 };
 
 export const addCard = (values, deckId) => {
-    console.log('ADD CARD', values, deckId);
     const card = {
         id: uuidv4(),
         question: values.question,

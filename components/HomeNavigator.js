@@ -14,7 +14,7 @@ const ICON_SIZE = 24;
 const HomeNavigator = TabNavigator(
     {
         [DECKS_TAB]: {
-            screen: () => <DeckNavigator onNavigationStateChange={(prevState, currentState) => updateFocus(currentState)}/>,
+            screen: DeckNavigator,
             navigationOptions: {
                 tabBarLabel: 'Decks',
                 tabBarIcon: <Foundation name="list" size={ICON_SIZE} color={colors.dark}/>

@@ -11,7 +11,6 @@ const entities = (state = [], action) => {
         case ADD_CARD:
             return state.map(deck => {
                 if (deck.id === action.deckId) {
-                    console.log('DECK FOUND', deck);
                     deck.cards.push(action.card.id);
                 }
                 return deck;

@@ -3,12 +3,14 @@ import { StyleSheet, Text, KeyboardAvoidingView, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
+import { NavigationActions } from 'react-navigation';
 
 import TextButton from './TextButton'
 import * as actions from '../actions'
 import Input from './Input'
 import { required } from '../utils/validators'
 import Success from './Success'
+import { SCREEN_DECK, SCREEN_DECKS } from './DeckNavigator'
 import { DECKS_TAB } from './HomeNavigator'
 import Title from './Title'
 
@@ -26,13 +28,21 @@ class AddDeck extends React.Component {
         this.props.addDeck(values);
     };
 
+    onSuccessPress = () => {
+        const navigateAction = NavigationActions.navigate({
+            routeName: DECKS_TAB,
+        });
+
+        this.props.navigation.dispatch(navigateAction);
+    };
+
     render() {
         if (this.props.submitSucceeded) {
             return (
                 <Success
                     formId={FORM_ID}
                     text={SUCCESS_TEXT}
-                    onPress={() => this.props.navigation.navigate(DECKS_TAB)}/>
+                    onPress={this.onSuccessPress}/>
             );
         }
 
