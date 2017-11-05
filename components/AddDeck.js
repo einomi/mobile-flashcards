@@ -2,38 +2,31 @@ import React from 'react'
 import { StyleSheet, Text, KeyboardAvoidingView, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
-import { NavigationActions } from 'react-navigation';
+import { Actions as NavActions } from "react-native-router-flux";
 
 import TextButton from './TextButton'
 import * as actions from '../actions'
 import Input from './Input'
 import { required } from '../utils/validators'
 import Success from './Success'
-import { SCREEN_DECK, SCREEN_DECKS } from './DeckNavigator'
-import { DECKS_TAB } from './HomeNavigator'
 import Title from './Title'
+import * as scenes from '../scenes'
 
-const FORM_ID = 'addDeck';
+export const FORM_ID = 'addDeck';
 const SUCCESS_TEXT = 'New deck was successfully added!';
 
 class AddDeck extends React.Component {
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.isFocused && nextProps.isFocused) {
-            this.props.resetForm(FORM_ID);
-        }
+    componentDidMount() {
+        this.props.resetForm(FORM_ID);
     }
-
+    
     handleSubmit = values => {
-        this.props.addDeck(values);
+        const result = this.props.addDeck(values);
+        this.deckId = result.deck.id;
     };
 
     onSuccessPress = () => {
-        const navigateAction = NavigationActions.navigate({
-            routeName: DECKS_TAB,
-        });
-
-        this.props.navigation.dispatch(navigateAction);
+        NavActions.push(scenes.DECK_DETAIL, { deckId: this.deckId });
     };
 
     render() {
@@ -76,6 +69,6 @@ AddDeck = connect(
     actions
 )(AddDeck);
 
-export default withNavigationFocus(reduxForm({
+export default reduxForm({
     form: FORM_ID,
-})(AddDeck))
+})(AddDeck)

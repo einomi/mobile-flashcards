@@ -1,14 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { Actions as NavActions } from "react-native-router-flux";
 
 import * as colors from '../utils/colors'
+import * as scenes from '../scenes'
 import { getDecks } from '../reducers'
-import { SCREEN_DECK } from './DeckNavigator'
 
 class DeckList extends React.Component {
     handlePress(deckId) {
-        this.props.navigation.navigate(SCREEN_DECK, { deckId });
+        NavActions.push(scenes.DECK_DETAIL, { deckId });
     }
 
     renderItem = ({item, index}) => {
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderBottomWidth: 0.5,
         borderColor: '#d6d7da',
+        backgroundColor: "#fff",
     },
     itemTitle: {
         fontSize: 20,

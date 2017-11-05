@@ -1,15 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
-import isEqual from 'lodash/isEqual'
-import uuidv4 from 'uuid/v4'
+import { Actions as NavActions } from 'react-native-router-flux'
 
 import TextButton from './TextButton'
 import * as colors from '../utils/colors'
 import { getDeck } from '../reducers'
-import { SCREEN_ADD_CARD } from './DeckNavigator'
 import { FORM_ID as FORM_ADD_CARD_ID } from './AddCard'
 import * as actions from '../actions'
+import * as scenes from '../scenes'
 
 class DeckDetail extends React.Component {
     render() {
@@ -26,7 +25,7 @@ class DeckDetail extends React.Component {
                         style={{marginBottom: 10}}
                         onPress={() => {
                             this.props.resetForm(FORM_ADD_CARD_ID);
-                            this.props.navigation.navigate(SCREEN_ADD_CARD, { resetFormKey: uuidv4(), deckId });
+                            NavActions.push(scenes.ADD_CARD, { deckId });
                         }}>
                         Add Card
                     </TextButton>
@@ -58,8 +57,8 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-    (state, navigationData) => {
-        const deckId = navigationData.navigation.state.params.deckId;
+    (state, navData) => {
+        const deckId = navData.deckId;
         return {
             deckId,
             ...getDeck(state, deckId)

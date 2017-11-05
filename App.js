@@ -1,33 +1,53 @@
 import React from 'react'
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import { StyleSheet, Text, View, StatusBar, AppState, AsyncStorage } from 'react-native'
 import { Constants } from 'expo'
-import { updateFocus } from 'react-navigation-is-focused-hoc'
+import {
+    Scene,
+    Router,
+    Actions,
+    Reducer,
+    Tabs,
+    Stack,
+    Lightbox,
+} from 'react-native-router-flux';
 
 import store from './store'
-import HomeNavigator from './components/HomeNavigator'
+import AddDeck from './components/AddDeck'
+import AddCard from './components/AddCard'
+import DeckList from './components/DeckList'
+import DeckDetail from './components/DeckDetail'
+import TabIcon from './components/TabIcon'
+import * as scenes from './scenes'
+import RouterWithRedux from './components/RouterWithRedux'
 
-export default class App extends React.Component {
+const getSceneStyle = () => ({
+    backgroundColor: '#F5FCFF',
+    shadowOpacity: 1,
+    shadowRadius: 3,
+});
+
+class App extends React.Component {
     state = {
         isStoreLoading: false,
-        store: store
+        store
     };
 
     componentWillMount() {
         var self = this;
         AppState.addEventListener('change', this._handleAppStateChange.bind(this));
-        this.setState({isStoreLoading: true});
-        AsyncStorage.getItem('completeStore').then((value)=>{
-            if(value && value.length){
+        this.setState({ isStoreLoading: true });
+        AsyncStorage.getItem('completeStore').then((value)=> {
+            if (value && value.length) {
                 let initialStore = JSON.parse(value);
-                self.setState({store: createStore(reducers, initialStore, middleware)});
-            }else{
-                self.setState({store: store});
+                self.setState({ store: createStore(reducers, initialStore, middleware) });
+            } else {
+                self.setState({ store: store });
             }
-            self.setState({isStoreLoading: false});
-        }).catch((error)=>{
-            self.setState({store: store});
-            self.setState({isStoreLoading: false});
+            self.setState({ isStoreLoading: false });
+        }).catch(error => {
+            self.setState({ store: store });
+            self.setState({ isStoreLoading: false });
         });
     }
 
@@ -51,16 +71,22 @@ export default class App extends React.Component {
 
         return (
             <Provider store={store}>
-
                 <View style={styles.container}>
                     <View style={{height: Constants.statusBarHeight}}>
                         <StatusBar/>
                     </View>
-                    <HomeNavigator
-                        onNavigationStateChange={(prevState, currentState) => {
-                            updateFocus(currentState);
-                        }}
-                    />
+                    <RouterWithRedux getSceneStyle={getSceneStyle}>
+                        <Tabs key="home" showLabel={false} tabBarStyle={styles.tabBarStyle}>
+                            <Stack key="tabDecks" title="Decks" icon={TabIcon}>
+                                <Scene key={scenes.DECK_LIST} component={DeckList}/>
+                                <Scene key={scenes.DECK_DETAIL} component={DeckDetail}/>
+                                <Scene key={scenes.ADD_CARD} component={AddCard}/>
+                            </Stack>
+                            <Stack key="tabNewDeck" title="New Deck" icon={TabIcon}>
+                                <Scene key={scenes.NEW_DECK} component={AddDeck}/>
+                            </Stack>
+                        </Tabs>
+                    </RouterWithRedux>
                 </View>
             </Provider>
         );
@@ -82,4 +108,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent: 'center',
     },
+    tabBarStyle: {
+        backgroundColor: '#eee',
+    },
 });
+
+export default App

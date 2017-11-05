@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, KeyboardAvoidingView, TextInput } from 'react-native'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
-import { NavigationActions } from 'react-navigation'
+import { Actions as NavActions } from 'react-native-router-flux'
 
 import TextButton from './TextButton'
 import Title from './Title'
@@ -10,31 +10,19 @@ import Input from './Input'
 import { required } from '../utils/validators'
 import * as actions from '../actions'
 import Success from './Success'
-import { SCREEN_DECK } from './DeckNavigator'
-import { DECKS_TAB } from './HomeNavigator'
+import * as scenes from '../scenes'
 
 export const FORM_ID = 'addCard';
 const SUCCESS_TEXT = 'New card was successfully added!';
 
 class AddCard extends React.Component {
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.resetFormKey !== this.props.resetFormKey) {
-            this.props.resetForm(FORM_ID);
-        }
-    }
-
     handleSubmit = values => {
         const deckId = this.props.navigation.state.params.deckId;
         this.props.addCard(values, deckId);
     };
 
     onSuccessPress = deckId => {
-        const navigateAction = NavigationActions.navigate({
-            routeName: SCREEN_DECK,
-            params: { deckId }
-        });
-
-        this.props.navigation.dispatch(navigateAction);
+        NavActions.push(scenes.DECK_DETAIL, { deckId });
     };
 
     render() {
