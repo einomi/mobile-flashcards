@@ -27,12 +27,11 @@ class AddCard extends React.Component {
 
     render() {
         if (this.props.submitSucceeded) {
-            const deckId = this.props.navigation.state.params.deckId;
             return (
                 <Success
                     formId={FORM_ID}
                     text={SUCCESS_TEXT}
-                    onPress={() => this.onSuccessPress(deckId)}/>
+                    onPress={() => this.onSuccessPress(this.props.deckId)}/>
             );
         }
 

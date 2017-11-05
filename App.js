@@ -4,12 +4,8 @@ import { StyleSheet, Text, View, StatusBar, AppState, AsyncStorage } from 'react
 import { Constants } from 'expo'
 import {
     Scene,
-    Router,
-    Actions,
-    Reducer,
     Tabs,
     Stack,
-    Lightbox,
 } from 'react-native-router-flux';
 
 import store from './store'
@@ -17,6 +13,7 @@ import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
 import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
+import Quiz from './components/Quiz'
 import TabIcon from './components/TabIcon'
 import * as scenes from './scenes'
 import RouterWithRedux from './components/RouterWithRedux'
@@ -81,6 +78,7 @@ class App extends React.Component {
                                 <Scene key={scenes.DECK_LIST} component={DeckList}/>
                                 <Scene key={scenes.DECK_DETAIL} component={DeckDetail}/>
                                 <Scene key={scenes.ADD_CARD} component={AddCard}/>
+                                <Scene key={scenes.QUIZ} component={Quiz}/>
                             </Stack>
                             <Stack key="tabNewDeck" title="New Deck" icon={TabIcon}>
                                 <Scene key={scenes.NEW_DECK} component={AddDeck}/>

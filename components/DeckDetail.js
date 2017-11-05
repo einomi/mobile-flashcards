@@ -6,13 +6,17 @@ import { Actions as NavActions } from 'react-native-router-flux'
 import TextButton from './TextButton'
 import * as colors from '../utils/colors'
 import { getDeck } from '../reducers'
-import { FORM_ID as FORM_ADD_CARD_ID } from './AddCard'
 import * as actions from '../actions'
 import * as scenes from '../scenes'
 
 class DeckDetail extends React.Component {
+    startQuiz = () => {
+        this.props.startQuiz(this.props.deck);
+        NavActions.push(scenes.QUIZ);
+    };
+
     render() {
-        const { title, cards, deckId } = this.props;
+        const { deck, deck: {title, cards} } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.top}>
@@ -23,13 +27,10 @@ class DeckDetail extends React.Component {
                     <TextButton
                         bright={true}
                         style={{marginBottom: 10}}
-                        onPress={() => {
-                            this.props.resetForm(FORM_ADD_CARD_ID);
-                            NavActions.push(scenes.ADD_CARD, { deckId });
-                        }}>
+                        onPress={() => NavActions.push(scenes.ADD_CARD, { deckId: deck.id })}>
                         Add Card
                     </TextButton>
-                    <TextButton>Start Quiz</TextButton>
+                    {<TextButton onPress={this.startQuiz}>Start Quiz</TextButton>}
                 </View>
             </View>
         );
@@ -60,8 +61,7 @@ export default connect(
     (state, navData) => {
         const deckId = navData.deckId;
         return {
-            deckId,
-            ...getDeck(state, deckId)
+            deck: getDeck(state, deckId)
         };
     },
     actions

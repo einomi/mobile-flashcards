@@ -14,6 +14,8 @@ const entities = (state = [], action) => {
     }
 };
 
+export const getCard = (state, id) => state.entities.find(i => i.id === id);
+
 export default combineReducers({
     entities,
 })

@@ -3,7 +3,7 @@ export default data = {
         entities: [
             {
                 id: 1,
-                title: 'MGIMO',
+                title: 'About me',
                 cards: [1, 2, 3]
             },
             {
@@ -22,47 +22,47 @@ export default data = {
         entities: [
             {
                 id: 1,
-                title: 'Don\'t ask girls about what?',
-                answer: 'Running'
+                question: 'What is my name?',
+                answer: 'Andrew'
             },
             {
                 id: 2,
-                title: 'Quam accusantium vel nostrum harum?',
-                answer: 'Error quae, nisi hic omnis amet eveniet consequatur nobis, facilis.'
+                question: 'Where do I live?',
+                answer: 'Saint Petersbourg, Russia.'
             },
             {
                 id: 3,
-                title: 'Non pariatur labore enim explicabo, perspiciatis blanditiis id laborum ipsam?',
-                answer: 'Ut voluptas iure nostrum sit a quidem, illum.'
+                question: 'How old am I?',
+                answer: '27'
             },
             {
                 id: 4,
-                title: 'Porro sunt distinctio est nemo eligendi, molestias rerum at quos consequatur expedita earum nisi quasi debitis aliquid, voluptatum rem sed, culpa doloremque fugiat?',
+                question: 'Porro sunt distinctio est nemo eligendi, molestias rerum at quos consequatur expedita earum nisi quasi debitis aliquid, voluptatum rem sed, culpa doloremque fugiat?',
                 answer: 'Voluptatibus aspernatur ex velit laudantium quidem quisquam.'
             },
             {
                 id: 5,
-                title: 'Quis repellendus rerum expedita, quae aliquid neque iste, totam repudiandae odit et reiciendis culpa atque veniam natus deserunt fugiat qui cupiditate dolore molestias aperiam accusantium rem delectus fugit omnis dicta?',
+                question: 'Quis repellendus rerum expedita, quae aliquid neque iste, totam repudiandae odit et reiciendis culpa atque veniam natus deserunt fugiat qui cupiditate dolore molestias aperiam accusantium rem delectus fugit omnis dicta Quis repellendus rerum expedita, quae aliquid neque iste, totam repudiandae odit et reiciendis culpa atque veniam natus deserunt fugiat qui cupiditate dolore molestias aperiam accusantium rem delectus fugit omnis dicta Quis repellendus rerum expedita, quae aliquid neque iste, totam repudiandae odit et reiciendis culpa atque veniam natus deserunt fugiat qui cupiditate dolore molestias aperiam accusantium rem delectus fugit omnis dicta?',
                 answer: 'Libero est autem delectus, omnis pariatur amet magni numquam excepturi placeat voluptates et beatae cum, vero dolores perferendis eum quod quasi ad atque unde ullam sit esse rerum id doloribus.'
             },
             {
                 id: 6,
-                title: 'Aliquid, incidunt?',
+                question: 'Aliquid, incidunt?',
                 answer: 'A autem rerum ipsam omnis facilis assumenda, repellendus aliquid, pariatur maiores sunt illum aliquam sint quod ut explicabo reprehenderit laboriosam tempora quidem, veritatis id laborum obcaecati delectus ea.'
             },
             {
                 id: 7,
-                title: 'Qui, eaque harum repellendus perspiciatis deleniti atque ipsam, itaque?',
+                question: 'Qui, eaque harum repellendus perspiciatis deleniti atque ipsam, itaque?',
                 answer: 'Alias laborum beatae non architecto adipisci cum distinctio voluptatem perspiciatis.'
             },
             {
                 id: 8,
-                title: 'Vero repudiandae temporibus cupiditate dolorem, perspiciatis consectetur porro itaque facilis error fuga quod, rem natus.',
+                question: 'Vero repudiandae temporibus cupiditate dolorem, perspiciatis consectetur porro itaque facilis error fuga quod, rem natus.',
                 answer: 'Nisi neque corporis ad ullam quisquam consequuntur.'
             },
             {
                 id: 9,
-                title: 'Adipisci repellendus illo architecto consequatur ratione optio dolore enim?',
+                question: 'Adipisci repellendus illo architecto consequatur ratione optio dolore enim?',
                 answer: 'Corrupti a alias soluta ipsa error aut praesentium expedita libero eum voluptatum.'
             },
         ]
