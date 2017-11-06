@@ -7,8 +7,10 @@ import {
     Tabs,
     Stack,
 } from 'react-native-router-flux';
+import { createStore, applyMiddleware } from 'redux'
+import { Foundation } from '@expo/vector-icons'
 
-import store from './store'
+import store, { middlewares } from './store'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
 import DeckList from './components/DeckList'
@@ -17,12 +19,14 @@ import Quiz from './components/Quiz'
 import TabIcon from './components/TabIcon'
 import * as scenes from './scenes'
 import RouterWithRedux from './components/RouterWithRedux'
+import rootReducer from './reducers'
 
 const getSceneStyle = () => ({
     backgroundColor: '#F5FCFF',
     shadowOpacity: 1,
     shadowRadius: 3,
 });
+const ICON_SIZE = 22;
 
 class App extends React.Component {
     state = {
@@ -31,20 +35,19 @@ class App extends React.Component {
     };
 
     componentWillMount() {
-        var self = this;
         AppState.addEventListener('change', this._handleAppStateChange.bind(this));
         this.setState({ isStoreLoading: true });
         AsyncStorage.getItem('completeStore').then((value)=> {
             if (value && value.length) {
                 let initialStore = JSON.parse(value);
-                self.setState({ store: createStore(reducers, initialStore, middleware) });
+                this.setState({ store: createStore(rootReducer, initialStore, applyMiddleware(...middlewares)) });
             } else {
-                self.setState({ store: store });
+                this.setState({ store });
             }
-            self.setState({ isStoreLoading: false });
+            this.setState({ isStoreLoading: false });
         }).catch(error => {
-            self.setState({ store: store });
-            self.setState({ isStoreLoading: false });
+            this.setState({ store: store });
+            this.setState({ isStoreLoading: false });
         });
     }
 
@@ -74,13 +77,22 @@ class App extends React.Component {
                     </View>
                     <RouterWithRedux getSceneStyle={getSceneStyle}>
                         <Tabs key="home" showLabel={false} tabBarStyle={styles.tabBarStyle}>
-                            <Stack key="tabDecks" title="Decks" icon={TabIcon}>
+                            <Stack key="tabDecks"
+                                   title="Decks"
+                                   icon={TabIcon}
+                                   iconImage={<Foundation name="list" size={ICON_SIZE}/>}
+                            >
                                 <Scene key={scenes.DECK_LIST} component={DeckList}/>
                                 <Scene key={scenes.DECK_DETAIL} component={DeckDetail}/>
                                 <Scene key={scenes.ADD_CARD} component={AddCard}/>
                                 <Scene key={scenes.QUIZ} component={Quiz}/>
                             </Stack>
-                            <Stack key="tabNewDeck" title="New Deck" icon={TabIcon}>
+                            <Stack
+                                key="tabNewDeck"
+                                title="New Deck"
+                                icon={TabIcon}
+                                    iconImage={<Foundation name="plus" size={ICON_SIZE}/>}
+                            >
                                 <Scene key={scenes.NEW_DECK} component={AddDeck}/>
                             </Stack>
                         </Tabs>
