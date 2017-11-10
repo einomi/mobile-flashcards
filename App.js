@@ -60,7 +60,7 @@ class App extends React.Component {
         }
 
         return (
-            <Provider store={store}>
+            <Provider store={this.state.store}>
                 <View style={styles.container}>
                     <View style={{height: Constants.statusBarHeight}}>
                         <StatusBar/>
