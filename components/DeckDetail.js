@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions as NavActions } from 'react-native-router-flux'
@@ -10,6 +11,10 @@ import * as actions from '../actions'
 import * as scenes from '../scenes'
 
 class DeckDetail extends React.Component {
+    static propTypes = {
+        deck: PropTypes.object.isRequired
+    };
+
     startQuiz = () => {
         this.props.startQuiz(this.props.deck);
         NavActions.push(scenes.QUIZ);

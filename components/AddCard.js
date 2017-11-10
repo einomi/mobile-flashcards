@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, Text, KeyboardAvoidingView, TextInput } from 'react-native'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
@@ -16,6 +17,10 @@ export const FORM_ID = 'addCard';
 const SUCCESS_TEXT = 'New card was successfully added!';
 
 class AddCard extends React.Component {
+    static propTypes = {
+        submitSucceeded: PropTypes.bool
+    };
+
     handleSubmit = values => {
         const deckId = this.props.navigation.state.params.deckId;
         this.props.addCard(values, deckId);
@@ -29,7 +34,6 @@ class AddCard extends React.Component {
         if (this.props.submitSucceeded) {
             return (
                 <Success
-                    formId={FORM_ID}
                     text={SUCCESS_TEXT}
                     onPress={() => this.onSuccessPress(this.props.deckId)}/>
             );
@@ -60,15 +64,14 @@ const styles = StyleSheet.create({
 
 AddCard = connect(
     (state, navigationData) => {
-        const resetFormKey = navigationData.navigation.state.params.resetFormKey;
         return {
             submitSucceeded: state.form[FORM_ID] && state.form[FORM_ID].submitSucceeded,
-            resetFormKey
         };
     },
     actions
 )(AddCard);
 
 export default reduxForm({
-    form: FORM_ID
+    form: FORM_ID,
+    destroyOnUnmount: false,
 })(AddCard)

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 import * as colors from '../utils/colors'
@@ -8,6 +9,11 @@ const TextButton = ({children, bright, style, onPress}) => (
         <Text style={[styles.text, bright && styles.textBright]}>{children}</Text>
     </TouchableOpacity>
 );
+
+TextButton.propTypes = {
+    bright: PropTypes.bool,
+    onPress: PropTypes.func,
+};
 
 const styles = StyleSheet.create({
     container: {

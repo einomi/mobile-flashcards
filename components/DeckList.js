@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import PropTypes from 'prop-types'
+import { StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions as NavActions } from "react-native-router-flux";
 
@@ -8,6 +9,10 @@ import * as scenes from '../scenes'
 import { getDecks } from '../reducers'
 
 class DeckList extends React.Component {
+    static propTypes = {
+        items: PropTypes.arrayOf(PropTypes.object).isRequired
+    };
+
     handlePress(deckId) {
         NavActions.push(scenes.DECK_DETAIL, { deckId });
     }

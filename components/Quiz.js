@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native'
+import PropTypes from 'prop-types'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions as NavActions } from 'react-native-router-flux'
 import {
@@ -18,6 +19,15 @@ import TextButton from './TextButton'
 import * as colors from '../utils/colors'
 
 class Quiz extends React.Component {
+    static propTypes = {
+        deck: PropTypes.object.isRequired,
+        currentIndex: PropTypes.number.isRequired,
+        correctCount: PropTypes.number.isRequired,
+        cardsTotal: PropTypes.number.isRequired,
+        cardsLeft: PropTypes.array.isRequired,
+        currentCard: PropTypes.object.isRequired,
+    };
+
     state = {
         showAnswer: false,
         showResult: false

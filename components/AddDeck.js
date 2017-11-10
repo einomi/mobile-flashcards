@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, Text, KeyboardAvoidingView, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
@@ -16,6 +17,10 @@ export const FORM_ID = 'addDeck';
 const SUCCESS_TEXT = 'New deck was successfully added!';
 
 class AddDeck extends React.Component {
+    static propTypes = {
+        submitSucceeded: PropTypes.bool
+    };
+
     handleSubmit = values => {
         const result = this.props.addDeck(values);
         this.deckId = result.deck.id;
@@ -30,7 +35,6 @@ class AddDeck extends React.Component {
         if (this.props.submitSucceeded) {
             return (
                 <Success
-                    formId={FORM_ID}
                     text={SUCCESS_TEXT}
                     onPress={this.onSuccessPress}/>
             );
