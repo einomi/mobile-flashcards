@@ -44,7 +44,7 @@ class AddDeck extends React.Component {
             <KeyboardAvoidingView style={styles.container}>
                 <Title>What is the title of your new deck?</Title>
                 <Field name="title" component={Input} placeholder="Deck Title" validate={[required]} style={styles.input}/>
-                <TextButton onPress={this.props.handleSubmit(this.handleSubmit)}>Submit</TextButton>
+                <TextButton onPress={this.props.handleSubmit(this.handleSubmit)}>Create Deck</TextButton>
             </KeyboardAvoidingView>
         );
     }

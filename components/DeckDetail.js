@@ -33,9 +33,9 @@ class DeckDetail extends React.Component {
                         bright={true}
                         style={{marginBottom: 10}}
                         onPress={() => NavActions.push(scenes.ADD_CARD, { deckId: deck.id })}>
-                        Add Card
+                        Create New Question
                     </TextButton>
-                    {<TextButton onPress={this.startQuiz}>Start Quiz</TextButton>}
+                    {<TextButton onPress={this.startQuiz}>Start a Quiz</TextButton>}
                 </View>
             </View>
         );
