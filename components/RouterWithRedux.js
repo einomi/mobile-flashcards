@@ -34,7 +34,7 @@ class CustomRouter extends React.Component {
         return (
             <Router createReducer={this.reducerCreate.bind(this)}>
                 <Stack key="home" showLabel={false}>
-                    <Tabs key="decks" showLabel={false} title="Home" tabBarStyle={styles.tabBarStyle} headerMode="none">
+                    <Tabs key="decks" showLabel={false} title="Mobile Flashcards" tabBarStyle={styles.tabBarStyle} headerMode="none">
                         <Scene key={scenes.DECK_LIST}
                                title="Decks"
                                icon={TabIcon}
@@ -51,9 +51,9 @@ class CustomRouter extends React.Component {
                                onEnter={() => this.props.resetForm(FORM_ADD_DECK_ID)}
                         />
                     </Tabs>
-                    <Scene key={scenes.DECK_DETAIL} component={DeckDetail}/>
-                    <Scene key={scenes.ADD_CARD} component={AddCard}/>
-                    <Scene key={scenes.QUIZ} component={Quiz}/>
+                    <Scene key={scenes.DECK_DETAIL} component={DeckDetail} backTitle="Decks"/>
+                    <Scene key={scenes.ADD_CARD} component={AddCard} backTitle="Back"/>
+                    <Scene key={scenes.QUIZ} component={Quiz} backTitle="Back"/>
                 </Stack>
             </Router>
         );
@@ -63,6 +63,7 @@ class CustomRouter extends React.Component {
 const styles = StyleSheet.create({
     tabBarStyle: {
         backgroundColor: '#eee',
+        height: 52,
     },
 });
 

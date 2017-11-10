@@ -68,4 +68,5 @@ AddDeck = connect(
 
 export default reduxForm({
     form: FORM_ID,
+    destroyOnUnmount: false,
 })(AddDeck)

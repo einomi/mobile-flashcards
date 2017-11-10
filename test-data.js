@@ -15,7 +15,7 @@ export default data = {
                 id: 3,
                 title: 'Udacity',
                 cards: [6, 7, 8, 9]
-            }
+            },
         ]
     },
     cards: {

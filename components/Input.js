@@ -2,10 +2,10 @@ import React from 'react'
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import * as colors from '../utils/colors'
 
-const Input = ({ input, style, meta: {visited, error}, ...restProps }) => {
+const Input = ({ input, style, meta: {touched, error}, ...restProps }) => {
     return (
         <View>
-            {visited && error && <Text style={[styles.error]}>{error}</Text>}
+            {touched && error && <Text style={[styles.error]}>{error}</Text>}
             <TextInput
                 {...input}
                 style={[styles.input, style]}

@@ -30,8 +30,9 @@ class DeckList extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         justifyContent: 'center',
+        paddingVertical: 14,
     },
     item: {
         paddingVertical: 12,

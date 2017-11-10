@@ -1,11 +1,11 @@
 import uuidv4 from 'uuid/v4'
-import { reset } from 'redux-form'
+import { reset, destroy, initialize } from 'redux-form'
 
 export const ADD_DECK = 'ADD_DECK';
 export const ADD_CARD = 'ADD_CARD';
-
 export const QUIZ_START = 'QUIZ_START';
 export const QUIZ_NEXT = 'QUIZ_NEXT';
+export const FORM_RESET = 'FORM_RESET';
 
 export const addDeck = values => {
     const deck = {
@@ -34,8 +34,13 @@ export const addCard = (values, deckId) => {
     };
 };
 
-export const resetForm = formId => (dispatch, getState) => {
-    dispatch(reset(formId));
+export const resetForm = formId => dispatch => {
+    // dispatch(destroy(formId));
+    dispatch(initialize(formId));
+    // return {
+    //     type: FORM_RESET,
+    //     formId
+    // };
 };
 
 export const startQuiz = deck => {
