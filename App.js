@@ -1,32 +1,20 @@
 import React from 'react'
-import { Provider, connect } from 'react-redux'
+import { Provider } from 'react-redux'
 import { StyleSheet, Text, View, StatusBar, AppState, AsyncStorage } from 'react-native'
 import { Constants } from 'expo'
-import {
-    Scene,
-    Tabs,
-    Stack,
-} from 'react-native-router-flux';
 import { createStore, applyMiddleware } from 'redux'
 import { Foundation } from '@expo/vector-icons'
 
 import store, { middlewares } from './store'
-import AddDeck from './components/AddDeck'
-import AddCard from './components/AddCard'
-import DeckList from './components/DeckList'
-import DeckDetail from './components/DeckDetail'
-import Quiz from './components/Quiz'
-import TabIcon from './components/TabIcon'
-import * as scenes from './scenes'
 import RouterWithRedux from './components/RouterWithRedux'
 import rootReducer from './reducers'
+import { setLocalNotification } from './utils';
 
 const getSceneStyle = () => ({
     backgroundColor: '#F5FCFF',
     shadowOpacity: 1,
     shadowRadius: 3,
 });
-const ICON_SIZE = 22;
 
 class App extends React.Component {
     state = {
@@ -49,6 +37,8 @@ class App extends React.Component {
             this.setState({ store: store });
             this.setState({ isStoreLoading: false });
         });
+
+        setLocalNotification();
     }
 
     componentWillUnmount() {
@@ -75,28 +65,7 @@ class App extends React.Component {
                     <View style={{height: Constants.statusBarHeight}}>
                         <StatusBar/>
                     </View>
-                    <RouterWithRedux getSceneStyle={getSceneStyle}>
-                        <Tabs key="home" showLabel={false} tabBarStyle={styles.tabBarStyle}>
-                            <Stack key="tabDecks"
-                                   title="Decks"
-                                   icon={TabIcon}
-                                   iconImage={<Foundation name="list" size={ICON_SIZE}/>}
-                            >
-                                <Scene key={scenes.DECK_LIST} component={DeckList}/>
-                                <Scene key={scenes.DECK_DETAIL} component={DeckDetail}/>
-                                <Scene key={scenes.ADD_CARD} component={AddCard}/>
-                                <Scene key={scenes.QUIZ} component={Quiz}/>
-                            </Stack>
-                            <Stack
-                                key="tabNewDeck"
-                                title="New Deck"
-                                icon={TabIcon}
-                                    iconImage={<Foundation name="plus" size={ICON_SIZE}/>}
-                            >
-                                <Scene key={scenes.NEW_DECK} component={AddDeck}/>
-                            </Stack>
-                        </Tabs>
-                    </RouterWithRedux>
+                    <RouterWithRedux getSceneStyle={getSceneStyle}/>
                 </View>
             </Provider>
         );
@@ -117,9 +86,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         justifyContent: 'center',
-    },
-    tabBarStyle: {
-        backgroundColor: '#eee',
     },
 });
 

@@ -2,6 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions as NavActions } from 'react-native-router-flux'
+import {
+    clearLocalNotification,
+    setLocalNotification
+} from '../utils'
 
 import {
     QUIZ_CORRECT,
@@ -9,7 +13,7 @@ import {
 } from '../utils/quiz'
 import * as actions from '../actions'
 import Title from './Title'
-import { getDeck, getCard } from '../reducers'
+import { getCard } from '../reducers'
 import TextButton from './TextButton'
 import * as colors from '../utils/colors'
 
@@ -18,6 +22,13 @@ class Quiz extends React.Component {
         showAnswer: false,
         showResult: false
     };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.showResult && !this.props.showResult) {
+            clearLocalNotification()
+                .then(setLocalNotification);
+        }
+    }
 
     handleAnswer(option) {
         this.props.quizNextCard(option);

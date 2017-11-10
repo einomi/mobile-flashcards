@@ -1,12 +1,30 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
-const TabIcon = (props) => {
+import * as colors from '../utils/colors'
+
+const TabIcon = ({ title, focused, iconImage }) => {
     return (
-        <Text style={{ color: props.focused ? '#3172bc' : 'black' }}>
-            {props.title}
-        </Text>
+        <View style={styles.container}>
+            <Text style={[focused ? styles.textFocused : styles.text, styles.icon]}>{iconImage}</Text>
+            <Text style={focused ? styles.textFocused : styles.text}>
+                {title}
+            </Text>
+        </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    text: {
+        color: colors.dark,
+    },
+    textFocused: {
+        color: '#3172bc'
+    }
+});
 
 export default TabIcon

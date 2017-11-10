@@ -16,16 +16,13 @@ export const FORM_ID = 'addDeck';
 const SUCCESS_TEXT = 'New deck was successfully added!';
 
 class AddDeck extends React.Component {
-    componentDidMount() {
-        this.props.resetForm(FORM_ID);
-    }
-    
     handleSubmit = values => {
         const result = this.props.addDeck(values);
         this.deckId = result.deck.id;
     };
 
     onSuccessPress = () => {
+        NavActions.push(scenes.DECK_LIST);
         NavActions.push(scenes.DECK_DETAIL, { deckId: this.deckId });
     };
 

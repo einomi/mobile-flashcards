@@ -5,9 +5,9 @@ import logger from 'redux-logger'
 import testData from '../test-data'
 import rootReducer from '../reducers'
 
-const LOGGER_ENABLED = true;
+const LOGGER_ENABLED = false;
 
-const middlewares = [
+export const middlewares = [
     thunk,
 ];
 
