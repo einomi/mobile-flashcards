@@ -41,6 +41,7 @@ class Quiz extends React.Component {
     }
 
     handleAnswer(option) {
+        this.setState({showAnswer: false});
         this.props.quizNextCard(option);
     }
 
