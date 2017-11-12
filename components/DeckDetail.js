@@ -9,6 +9,7 @@ import * as colors from '../utils/colors'
 import { getDeck } from '../reducers'
 import * as actions from '../actions'
 import * as scenes from '../scenes'
+import stylesCommon from '../utils/stylesCommon'
 
 class DeckDetail extends React.Component {
     static propTypes = {
@@ -23,7 +24,7 @@ class DeckDetail extends React.Component {
     render() {
         const { deck, deck: {title, cards} } = this.props;
         return (
-            <View style={styles.container}>
+            <View style={stylesCommon.stretchedContainer}>
                 <View style={styles.top}>
                     <Text style={styles.title}>{title}</Text>
                     <Text style={styles.caption}>{cards.length} card{cards.length > 1 && 's'}</Text>
@@ -43,11 +44,6 @@ class DeckDetail extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     top: {
         marginBottom: 28,
         alignItems: 'center'

@@ -9,6 +9,7 @@ import store, { middlewares } from './store'
 import RouterWithRedux from './components/RouterWithRedux'
 import rootReducer from './reducers'
 import { setLocalNotification } from './utils';
+import stylesCommon from './utils/stylesCommon'
 
 const getSceneStyle = () => ({
     backgroundColor: '#F5FCFF',
@@ -53,7 +54,7 @@ class App extends React.Component {
     render() {
         if (this.state.isStoreLoading) {
             return (
-                <View style={styles.loading}>
+                <View style={stylesCommon.stretchedContainer}>
                     <Text style={styles.loadingText}>Loading...</Text>
                 </View>
             );
@@ -73,11 +74,6 @@ class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    loading: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     loadingText: {
         fontSize: 16,
         fontWeight: '500'

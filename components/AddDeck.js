@@ -12,6 +12,7 @@ import { required } from '../utils/validators'
 import Success from './Success'
 import Title from './Title'
 import * as scenes from '../scenes'
+import stylesCommon from '../utils/stylesCommon'
 
 export const FORM_ID = 'addDeck';
 const SUCCESS_TEXT = 'New deck was successfully added!';
@@ -41,7 +42,7 @@ class AddDeck extends React.Component {
         }
 
         return (
-            <KeyboardAvoidingView style={styles.container}>
+            <KeyboardAvoidingView style={stylesCommon.stretchedContainer}>
                 <Title>What is the title of your new deck?</Title>
                 <Field name="title" component={Input} placeholder="Deck Title" validate={[required]} style={styles.input}/>
                 <TextButton onPress={this.props.handleSubmit(this.handleSubmit)}>Create Deck</TextButton>
@@ -51,11 +52,6 @@ class AddDeck extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     input: {
         marginBottom: 22,
     },

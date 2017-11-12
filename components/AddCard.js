@@ -12,6 +12,7 @@ import { required } from '../utils/validators'
 import * as actions from '../actions'
 import Success from './Success'
 import * as scenes from '../scenes'
+import stylesCommon from '../utils/stylesCommon'
 
 export const FORM_ID = 'addCard';
 const SUCCESS_TEXT = 'New card was successfully added!';
@@ -40,7 +41,7 @@ class AddCard extends React.Component {
         }
 
         return (
-            <KeyboardAvoidingView style={styles.container}>
+            <KeyboardAvoidingView style={stylesCommon.stretchedContainer}>
                 <Title>Add card</Title>
                 <Field name="question" component={Input} placeholder="Question here" validate={[required]} style={styles.input}/>
                 <Field name="answer" component={Input} placeholder="Answer here" validate={[required]} style={styles.input}/>
@@ -51,11 +52,6 @@ class AddCard extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     input: {
         width: 240,
         marginBottom: 22,
@@ -63,7 +59,7 @@ const styles = StyleSheet.create({
 });
 
 AddCard = connect(
-    (state, navigationData) => {
+    state => {
         return {
             submitSucceeded: state.form[FORM_ID] && state.form[FORM_ID].submitSucceeded,
         };
