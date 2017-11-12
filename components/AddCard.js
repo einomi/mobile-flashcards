@@ -26,8 +26,8 @@ class AddCard extends React.Component {
         this.props.addCard(values, deckId);
     };
 
-    onSuccessPress = deckId => {
-        NavActions.push(scenes.DECK_DETAIL, { deckId });
+    onSuccessPress = () => {
+        NavActions.pop();
     };
 
     render() {
@@ -35,7 +35,7 @@ class AddCard extends React.Component {
             return (
                 <Success
                     text={SUCCESS_TEXT}
-                    onPress={() => this.onSuccessPress(this.props.deckId)}/>
+                    onPress={() => this.onSuccessPress()}/>
             );
         }
 
