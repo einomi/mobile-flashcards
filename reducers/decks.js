@@ -10,10 +10,11 @@ const entities = (state = [], action) => {
             ];
         case ADD_CARD:
             return state.map(deck => {
-                if (deck.id === action.deckId) {
-                    deck.cards.push(action.card.id);
+                let newDeck = {...deck};
+                if (newDeck.id === action.deckId) {
+                    newDeck.cards.push(action.card.id);
                 }
-                return deck;
+                return newDeck;
             });
         default:
             return state;
