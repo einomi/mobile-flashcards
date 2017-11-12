@@ -18,6 +18,7 @@ import TabIcon from '../components/TabIcon'
 import * as scenes from '../scenes'
 import { resetForm } from '../actions'
 import { FORM_ID as FORM_ADD_DECK_ID } from './AddDeck';
+import { FORM_ID as FORM_ADD_CARD_ID } from './AddCard';
 
 const ICON_SIZE = 22;
 
@@ -52,7 +53,12 @@ class CustomRouter extends React.Component {
                         />
                     </Tabs>
                     <Scene key={scenes.DECK_DETAIL} component={DeckDetail} backTitle="Decks"/>
-                    <Scene key={scenes.ADD_CARD} component={AddCard} backTitle="Back"/>
+                    <Scene
+                        key={scenes.ADD_CARD}
+                        component={AddCard}
+                        backTitle="Back"
+                        onEnter={() => this.props.resetForm(FORM_ADD_CARD_ID)}
+                    />
                     <Scene key={scenes.QUIZ} component={Quiz} backTitle="Back"/>
                 </Stack>
             </Router>
